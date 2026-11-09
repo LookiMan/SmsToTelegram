@@ -1,3 +1,14 @@
+![Kotlin 2.0](https://img.shields.io/badge/Kotlin-2.0-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+![Android](https://img.shields.io/badge/Android-34A853?style=for-the-badge&logo=android&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white)
+
+![Version 2.6](https://img.shields.io/badge/version-2.6-blue?style=flat-square)
+![Android 8.0+](https://img.shields.io/badge/Android-8.0%2B%20%28API%2026%29-34A853?style=flat-square&logo=android&logoColor=white)
+![No dependencies](https://img.shields.io/badge/dependencies-none-brightgreen?style=flat-square)
+![Languages EN | UK](https://img.shields.io/badge/languages-EN%20%7C%20UK-informational?style=flat-square)
+
 # SMS to Telegram
 
 Forwards every incoming SMS from an old Android phone to your own Telegram bot.
