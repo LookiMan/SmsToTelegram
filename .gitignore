@@ -1,0 +1,13 @@
+# Gradle / Kotlin build output and caches
+.gradle/
+.kotlin/
+build/
+app/build/
+
+# Machine-specific
+local.properties
+.idea/
+*.iml
+
+# Built APK (rebuild with build.ps1)
+*.apk

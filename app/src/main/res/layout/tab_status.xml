@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <!-- Setup: shown only while no token is saved -->
+        <LinearLayout
+            android:id="@+id/setupCard"
+            style="@style/Card">
+
+            <TextView
+                style="@style/CardLabel"
+                android:drawableStart="@drawable/ic_key"
+                android:text="@string/setup_token_label" />
+
+            <EditText
+                android:id="@+id/tokenField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:hint="123456789:AAE…"
+                android:importantForAutofill="no"
+                android:inputType="text|textVisiblePassword"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/setup_token_hint"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- State -->
+        <LinearLayout style="@style/Card">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/stateIconBg"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_circle">
+
+                    <ImageView
+                        android:id="@+id/stateIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_wifi" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/stateTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/stateSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/toggleButton"
+                style="@style/PrimaryButton"
+                android:layout_marginTop="12dp"
+                android:text="@string/btn_start" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout style="@style/Tile">
+                    <TextView android:id="@+id/waitingValue" style="@style/TileValue" />
+                    <TextView android:id="@+id/waitingLabel" style="@style/TileLabel" android:text="@string/tile_waiting" />
+                </LinearLayout>
+
+                <Space android:layout_width="6dp" android:layout_height="1dp" />
+
+                <LinearLayout style="@style/Tile">
+                    <TextView android:id="@+id/lastSmsValue" style="@style/TileValue" />
+                    <TextView style="@style/TileLabel" android:text="@string/tile_last_sms" />
+                </LinearLayout>
+
+                <Space android:layout_width="6dp" android:layout_height="1dp" />
+
+                <LinearLayout style="@style/Tile">
+                    <TextView android:id="@+id/lastSentValue" style="@style/TileValue" />
+                    <TextView style="@style/TileLabel" android:text="@string/tile_last_sent" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Problems the user must fix (permission, battery optimization) -->
+        <TextView
+            android:id="@+id/warningsCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_card"
+            android:backgroundTint="@color/warning_soft"
+            android:padding="14dp"
+            android:textColor="@color/warning"
+            android:textSize="13sp" />
+
+        <!-- Mode -->
+        <LinearLayout style="@style/Card">
+
+            <TextView
+                style="@style/CardLabel"
+                android:drawableStart="@drawable/ic_tune"
+                android:text="@string/mode_title" />
+
+            <SeekBar
+                android:id="@+id/modeSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="2"
+                android:progressTint="@color/accent"
+                android:thumbTint="@color/accent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp">
+
+                <TextView
+                    android:id="@+id/modeEnergy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/mode_energy"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/modeBalanced"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/mode_balanced"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/modePerformance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/mode_performance"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/modeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Bot: collapsible; when collapsed the header shows the polling state -->
+        <LinearLayout
+            android:id="@+id/botCard"
+            style="@style/Card">
+
+            <LinearLayout
+                android:id="@+id/botHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_send"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/text_secondary"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:text="@string/bot_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/botSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/botChevron"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_expand_more"
+                    android:tint="@color/text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/botBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout style="@style/KeyValueRow">
+                    <TextView style="@style/KeyText" android:text="@string/bot_token" />
+                    <TextView android:id="@+id/tokenValue" style="@style/ValueText" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/KeyValueRow">
+                    <TextView style="@style/KeyText" android:text="@string/bot_chat" />
+                    <TextView android:id="@+id/chatValue" style="@style/ValueText" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/KeyValueRow">
+                    <TextView style="@style/KeyText" android:text="@string/bot_polling" />
+                    <TextView android:id="@+id/pollingValue" style="@style/ValueText" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/testButton"
+                    style="@style/OutlineButton"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/btn_send_test" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Help: collapsed by default -->
+        <LinearLayout style="@style/Card">
+
+            <LinearLayout
+                android:id="@+id/helpHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/ic_help"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/text_secondary"
+                    android:gravity="center_vertical"
+                    android:text="@string/help_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/helpChevron"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_expand_more"
+                    android:tint="@color/text_secondary" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/helpBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/help_body"
+                android:textColor="@color/text_secondary"
+                android:textIsSelectable="true"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/resetButton"
+            style="@style/DangerButton"
+            android:layout_marginTop="4dp"
+            android:text="@string/btn_reset" />
+
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp" />
+    </LinearLayout>
+</ScrollView>

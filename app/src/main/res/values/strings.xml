@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- All user-visible texts (English, the default). The Ukrainian translation is in values-uk/strings.xml.
+     Logs stay in English on purpose: they are stored as text and used for diagnostics. -->
+<resources>
+    <string name="app_name" translatable="false">SMS to Telegram</string>
+    <string name="lang_en" translatable="false">EN</string>
+    <string name="lang_uk" translatable="false">UK</string>
+
+    <!-- Tabs -->
+    <string name="tab_status">Status</string>
+    <string name="tab_logs">Logs</string>
+
+    <!-- Setup -->
+    <string name="setup_token_label">Bot token</string>
+    <string name="setup_token_hint">Get it from @BotFather in Telegram, then press Start.</string>
+
+    <!-- State card -->
+    <string name="btn_start">Start</string>
+    <string name="btn_stop">Stop</string>
+    <string name="state_stopped">Stopped</string>
+    <string name="state_stopped_hint">Press Start to forward SMS</string>
+    <string name="state_stopped_no_token">Paste your bot token and press Start</string>
+    <string name="state_wait_start">Waiting for /start</string>
+    <string name="state_wait_start_hint">Open your bot in Telegram and send /start</string>
+    <string name="state_offline">Offline</string>
+    <string name="state_offline_hint">Telegram unreachable since %1$s. SMS are saved.</string>
+    <string name="state_running">Running</string>
+    <string name="state_online_hint">Telegram online since %1$s</string>
+    <string name="state_checking">Checking connection…</string>
+    <string name="tile_waiting">waiting</string>
+    <string name="tile_waiting_failed">waiting · %1$d failed</string>
+    <string name="tile_last_sms">last SMS</string>
+    <string name="tile_last_sent">last sent</string>
+
+    <!-- Warnings -->
+    <string name="warn_sms_permission">SMS permission is not granted.</string>
+    <string name="warn_battery">Battery optimization is on: the system may stop the app.</string>
+
+    <!-- Mode card -->
+    <string name="mode_title">Mode</string>
+    <string name="mode_energy">energy</string>
+    <string name="mode_balanced">balanced</string>
+    <string name="mode_performance">performance</string>
+    <string name="mode_description">Check %1$d s · resend %2$d s · new SMS instantly</string>
+
+    <!-- Bot card -->
+    <string name="bot_title">Bot</string>
+    <string name="bot_token">Token</string>
+    <string name="bot_chat">Chat</string>
+    <string name="bot_polling">Polling</string>
+    <string name="bot_not_linked">not linked</string>
+    <string name="poll_ok">ok · %1$s</string>
+    <string name="poll_reconnecting">reconnecting…</string>
+    <string name="btn_send_test">Send test message</string>
+
+    <!-- Short network error reasons (shown in the Bot card) -->
+    <string name="net_no_internet">no internet</string>
+    <string name="net_timeout">timeout</string>
+    <string name="net_no_connection">no connection</string>
+    <string name="net_tls">secure connection failed</string>
+    <string name="net_error">network error</string>
+
+    <!-- Help -->
+    <string name="help_title">Help and MIUI setup</string>
+    <string name="help_body">Bot commands\n• /start: links your chat (only the first chat that sends it)\n• /ping: replies \"pong\" if this phone is online and the app is running\n• /perf: shows the mode; /energy, /balanced, /performance switch it\n\nMIUI: Settings → Apps → SMS to Telegram\n• Autostart: on\n• Battery saver: No restrictions\n• Other permissions: allow everything SMS-related\n• Lock the app in recent apps (padlock)</string>
+
+    <!-- Reset -->
+    <string name="btn_reset">Remove token and chat</string>
+    <string name="reset_title">Remove token and linked chat?</string>
+    <string name="reset_body">This will:\n• stop forwarding\n• delete the bot token %1$s\n• unlink %2$s\n• delete %3$s\n\nTo use the app again you\'ll need to enter the token and send /start to the bot.</string>
+    <string name="reset_chat">chat %1$s</string>
+    <string name="reset_no_chat">no chat (not linked yet)</string>
+    <plurals name="unsent_messages">
+        <item quantity="one">%1$d unsent message</item>
+        <item quantity="other">%1$d unsent messages</item>
+    </plurals>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_remove">Remove</string>
+
+    <string name="version">Version %1$s</string>
+
+    <!-- Logs tab -->
+    <string name="logs_all">All</string>
+    <string name="logs_warning">Warning</string>
+    <string name="logs_error">Error</string>
+    <string name="logs_empty">No log entries yet</string>
+    <string name="logs_clear">Clear</string>
+    <string name="logs_clear_title">Clear all logs?</string>
+    <string name="logs_clear_body">%1$d entries will be deleted. This can\'t be undone.</string>
+
+    <!-- Toasts -->
+    <string name="toast_bad_token">This doesn\'t look like a bot token. It should look like 123456789:AAE…</string>
+    <string name="toast_need_sms">Without the SMS permission the app can\'t work</string>
+    <string name="toast_test_queued">Test message queued</string>
+    <string name="toast_reset_done">Token and linked chat removed</string>
+
+    <!-- Test message (sent to Telegram) -->
+    <string name="test_sender">Test message</string>
+    <string name="test_text">If you see this, sending works.</string>
+
+    <!-- Notification -->
+    <string name="notif_channel">SMS forwarding</string>
+    <string name="notif_text">Forwarding is active</string>
+
+    <!-- Bot replies -->
+    <string name="bot_linked">✅ Chat linked. SMS from this phone will be forwarded here.\n/ping — connection check.</string>
+    <string name="bot_already_linked">Already linked ✅</string>
+    <string name="bot_mode_current">Current mode: %1$s</string>
+    <string name="bot_mode_describe">check every %1$d s, resend every %2$d s</string>
+    <string name="bot_mode_footer">New SMS are always sent immediately.</string>
+    <string name="bot_mode_changed">✅ Mode: %1$s\n%2$s</string>
+</resources>

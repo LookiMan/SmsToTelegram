@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark palette, used automatically when the system is in dark mode. -->
+<resources>
+    <color name="surface">#121316</color>
+    <color name="card">#1E2025</color>
+    <color name="tile">#2A2C31</color>
+    <color name="border">#3A3D44</color>
+
+    <color name="accent">#AEC6FF</color>
+    <color name="on_accent">#002E69</color>
+    <color name="accent_soft">#2B3A5C</color>
+
+    <color name="text_primary">#E3E2E6</color>
+    <color name="text_secondary">#B5B8C0</color>
+    <color name="text_muted">#8B8E96</color>
+
+    <color name="neutral_soft">#33363C</color>
+    <color name="success">#7FD8A0</color>
+    <color name="success_soft">#1F3A2A</color>
+    <color name="warning">#F2C46D</color>
+    <color name="warning_soft">#3D2E0B</color>
+    <color name="danger">#F2B8B5</color>
+    <color name="danger_soft">#4A1D1A</color>
+
+    <!-- Start / Stop button: solid, white text in both themes. -->
+    <color name="start_button">#2E7D4F</color>
+    <color name="stop_button">#B3392F</color>
+</resources>

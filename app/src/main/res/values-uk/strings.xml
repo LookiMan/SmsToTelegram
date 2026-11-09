@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ukrainian translation. Keys missing here fall back to values/strings.xml (English). -->
+<resources>
+    <string name="tab_status">Статус</string>
+    <string name="tab_logs">Логи</string>
+
+    <string name="setup_token_label">Токен бота</string>
+    <string name="setup_token_hint">Отримайте його в @BotFather у Telegram і натисніть «Запустити».</string>
+
+    <string name="btn_start">Запустити</string>
+    <string name="btn_stop">Зупинити</string>
+    <string name="state_stopped">Зупинено</string>
+    <string name="state_stopped_hint">Натисніть «Запустити», щоб пересилати SMS</string>
+    <string name="state_stopped_no_token">Вставте токен бота й натисніть «Запустити»</string>
+    <string name="state_wait_start">Очікую /start</string>
+    <string name="state_wait_start_hint">Відкрийте бота в Telegram і надішліть /start</string>
+    <string name="state_offline">Немає зв\'язку</string>
+    <string name="state_offline_hint">Telegram недоступний з %1$s. SMS збережено.</string>
+    <string name="state_running">Працює</string>
+    <string name="state_online_hint">Telegram на зв\'язку з %1$s</string>
+    <string name="state_checking">Перевіряю з\'єднання…</string>
+    <string name="tile_waiting">у черзі</string>
+    <string name="tile_waiting_failed">у черзі · %1$d невдалих</string>
+    <string name="tile_last_sms">остання SMS</string>
+    <string name="tile_last_sent">відправлено</string>
+
+    <string name="warn_sms_permission">Немає дозволу на SMS.</string>
+    <string name="warn_battery">Увімкнена оптимізація батареї: система може зупинити застосунок.</string>
+
+    <string name="mode_title">Режим</string>
+    <string name="mode_energy">економія</string>
+    <string name="mode_balanced">баланс</string>
+    <string name="mode_performance">швидкодія</string>
+    <string name="mode_description">Перевірка %1$d с · повтор %2$d с · нові SMS одразу</string>
+
+    <string name="bot_title">Бот</string>
+    <string name="bot_token">Токен</string>
+    <string name="bot_chat">Чат</string>
+    <string name="bot_polling">Опитування</string>
+    <string name="bot_not_linked">не прив\'язано</string>
+    <string name="poll_ok">ok · %1$s</string>
+    <string name="poll_reconnecting">перепідключення…</string>
+    <string name="btn_send_test">Надіслати тест</string>
+
+    <string name="net_no_internet">немає інтернету</string>
+    <string name="net_timeout">тайм-аут</string>
+    <string name="net_no_connection">немає з\'єднання</string>
+    <string name="net_tls">помилка захищеного з\'єднання</string>
+    <string name="net_error">помилка мережі</string>
+
+    <string name="help_title">Довідка та налаштування MIUI</string>
+    <string name="help_body">Команди бота\n• /start: прив\'язує ваш чат (лише перший чат, що його надішле)\n• /ping: відповідає \"pong\", якщо телефон онлайн і застосунок працює\n• /perf: показує режим; /energy, /balanced, /performance перемикають його\n\nMIUI: Налаштування → Застосунки → SMS to Telegram\n• Автозапуск: увімкнено\n• Контроль активності: Без обмежень\n• Інші дозволи: дозволити все, що стосується SMS\n• Закріпіть застосунок у недавніх (замок)</string>
+
+    <string name="btn_reset">Видалити токен і чат</string>
+    <string name="reset_title">Видалити токен і прив\'язаний чат?</string>
+    <string name="reset_body">Буде:\n• зупинено пересилання\n• видалено токен бота %1$s\n• відв\'язано %2$s\n• видалено %3$s\n\nЩоб користуватися знову, треба ввести токен і надіслати боту /start.</string>
+    <string name="reset_chat">чат %1$s</string>
+    <string name="reset_no_chat">чат (ще не прив\'язаний)</string>
+    <plurals name="unsent_messages">
+        <item quantity="one">%1$d невідправлене повідомлення</item>
+        <item quantity="few">%1$d невідправлені повідомлення</item>
+        <item quantity="many">%1$d невідправлених повідомлень</item>
+        <item quantity="other">%1$d невідправлених повідомлень</item>
+    </plurals>
+    <string name="btn_cancel">Скасувати</string>
+    <string name="btn_remove">Видалити</string>
+
+    <string name="version">Версія %1$s</string>
+
+    <string name="logs_all">Усі</string>
+    <string name="logs_warning">Попередження</string>
+    <string name="logs_error">Помилки</string>
+    <string name="logs_empty">Записів ще немає</string>
+    <string name="logs_clear">Очистити</string>
+    <string name="logs_clear_title">Очистити всі логи?</string>
+    <string name="logs_clear_body">Буде видалено записів: %1$d. Це не можна скасувати.</string>
+
+    <string name="toast_bad_token">Це не схоже на токен бота. Він має вигляд 123456789:AAE…</string>
+    <string name="toast_need_sms">Без дозволу на SMS застосунок не працюватиме</string>
+    <string name="toast_test_queued">Тестове повідомлення в черзі</string>
+    <string name="toast_reset_done">Токен і чат видалено</string>
+
+    <string name="test_sender">Тестове повідомлення</string>
+    <string name="test_text">Якщо ви це бачите, відправка працює.</string>
+
+    <string name="notif_channel">Пересилання SMS</string>
+    <string name="notif_text">Пересилання активне</string>
+
+    <string name="bot_linked">✅ Чат прив\'язано. SMS з цього телефона пересилатимуться сюди.\n/ping — перевірка зв\'язку.</string>
+    <string name="bot_already_linked">Уже прив\'язано ✅</string>
+    <string name="bot_mode_current">Поточний режим: %1$s</string>
+    <string name="bot_mode_describe">перевірка кожні %1$d с, повтор кожні %2$d с</string>
+    <string name="bot_mode_footer">Нові SMS завжди відправляються одразу.</string>
+    <string name="bot_mode_changed">✅ Режим: %1$s\n%2$s</string>
+</resources>
