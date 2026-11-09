@@ -43,6 +43,13 @@ data class LogEntry(
     val text: String,
 )
 
+/** Where components write log entries. Implemented by the `logs` table; tests use a fake. */
+interface EventLog {
+    fun info(text: String)
+    fun warning(text: String)
+    fun error(text: String)
+}
+
 /** The single row of the `settings` table. */
 data class Settings(
     val botToken: String?,

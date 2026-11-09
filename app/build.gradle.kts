@@ -11,8 +11,8 @@ android {
         applicationId = "ua.home.smstg"
         minSdk = 26
         targetSdk = 34
-        versionCode = 11
-        versionName = "2.5"
+        versionCode = 12
+        versionName = "2.6"
     }
 
     buildTypes {
@@ -31,4 +31,9 @@ android {
     }
 }
 
-// No third-party libraries: only the Android SDK and the Kotlin stdlib.
+dependencies {
+    // Test-only (not in the APK): JVM unit tests for the pure logic, run by build.ps1.
+    testImplementation("junit:junit:4.13.2")
+}
+
+// The app itself has no third-party libraries: only the Android SDK and the Kotlin stdlib.

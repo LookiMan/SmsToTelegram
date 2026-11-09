@@ -1,6 +1,6 @@
 package ua.home.smstg.core
 
-import ua.home.smstg.data.LogRepository
+import ua.home.smstg.model.EventLog
 
 /**
  * Single source of truth for "can we reach Telegram right now".
@@ -8,7 +8,7 @@ import ua.home.smstg.data.LogRepository
  * WARNING when the connection is lost, INFO when it is back (with the outage duration).
  */
 class ConnectionMonitor(
-    private val logs: LogRepository,
+    private val logs: EventLog,
     private val clock: () -> Long = System::currentTimeMillis,
 ) {
     /** null until the first observation. */

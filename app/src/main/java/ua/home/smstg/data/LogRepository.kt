@@ -2,6 +2,7 @@ package ua.home.smstg.data
 
 import android.content.ContentValues
 import android.util.Log
+import ua.home.smstg.model.EventLog
 import ua.home.smstg.model.LogEntry
 import ua.home.smstg.model.LogLevel
 
@@ -9,11 +10,11 @@ import ua.home.smstg.model.LogLevel
 class LogRepository(
     private val db: AppDatabase,
     private val clock: () -> Long = System::currentTimeMillis,
-) {
+) : EventLog {
 
-    fun info(text: String) = add(LogLevel.INFO, text)
-    fun warning(text: String) = add(LogLevel.WARNING, text)
-    fun error(text: String) = add(LogLevel.ERROR, text)
+    override fun info(text: String) = add(LogLevel.INFO, text)
+    override fun warning(text: String) = add(LogLevel.WARNING, text)
+    override fun error(text: String) = add(LogLevel.ERROR, text)
 
     private fun add(level: LogLevel, text: String) {
         val priority = when (level) {

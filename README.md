@@ -20,14 +20,19 @@ is resent as plain text, so formatting can never block delivery.
 
 ## 2. Build the APK (no Android Studio needed)
 Requirements: JDK 17 and the Android SDK (`platforms;android-35`, `build-tools;34.0.0`).
+`build.ps1` expects them in `D:\Tools\android-build` (`jdk\`, `sdk\`, `gradle-home\`); another
+folder can be given with `-ToolsDir` or the `SMSTG_TOOLS` environment variable.
 
-```bash
-set JAVA_HOME=<path to JDK 17>
-set ANDROID_HOME=<path to Android SDK>
-gradlew.bat assembleDebug
+```powershell
+.\build.ps1             # unit tests + APK → SmsToTelegram.apk
+.\build.ps1 -SkipTests  # APK only
 ```
 
-Output: `app/build/outputs/apk/debug/app-debug.apk`.
+Output: `SmsToTelegram.apk` in the project folder (also `app/build/outputs/apk/debug/app-debug.apk`).
+
+**Tests** (`app/src/test`) are plain JVM tests for the logic that needs no device: retry delays,
+message formatting and escaping, duplicate filtering, connection tracking, network error reasons,
+modes. JUnit is a test-only dependency; the APK has no third-party libraries.
 Alternatively, open the folder in Android Studio and use *Build → Build APK(s)*.
 
 ## 3. Install on the old phone (tested target: Xiaomi, MIUI 13, Android 12)
@@ -73,6 +78,10 @@ limit (e.g. 80%), turn it on.
    - **Telegram rejected it (4xx)** → `tries += 1`. After 5 such rounds the message is given up.
 4. The message is sent as Telegram HTML; if Telegram rejects the markup (HTTP 400), the same
    text is resent as plain text, so formatting can never block delivery.
+
+Delivery is **at least once**: if Telegram accepted a message but its answer was lost (timeout),
+the message is sent again. A rare duplicate is preferred over a lost SMS. Only one delivery pass
+runs at a time, even while the service is being restarted, so a message is never sent twice in parallel.
 
 Sending is triggered immediately by: a new SMS, Android reporting that a network is available,
 the chat being linked, a test message, a mode change. Two timers cover everything else.

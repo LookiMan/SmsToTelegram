@@ -23,7 +23,10 @@ object RetryPolicy {
 
 /**
  * Sends unsent messages from the database to Telegram, oldest first.
- * Runs on one thread only (the service's sender thread), so a message is never sent twice in parallel.
+ *
+ * Only one delivery pass runs at a time, even across service restarts: if Android recreates the
+ * service while the old sender thread is still inside an HTTP call, the new thread waits for the
+ * old pass to finish and then re-reads the queue, so a message is never sent twice in parallel.
  */
 class MessageDispatcher(
     private val settings: SettingsRepository,
@@ -33,25 +36,28 @@ class MessageDispatcher(
     private val signal: WakeSignal,
     private val connection: ConnectionMonitor,
 ) {
-    /** Set to false by the service when it stops, to abort retry pauses. */
-    @Volatile var active = false
+    private val passLock = Any()
 
     private enum class Outcome { SENT, REJECTED, NO_CONNECTION, STOPPED }
 
     /**
      * Sends everything that is pending. Stops early if the connection is down:
      * the remaining messages wait for the network to come back.
+     *
+     * [isActive] belongs to the calling service instance (not shared), so a stopped instance
+     * can never be "revived" by a new one and keep sending in parallel.
      */
-    fun sendPending() {
+    fun sendPending(isActive: () -> Boolean) = synchronized(passLock) {
+        if (!isActive()) return
         val s = settings.get()
         val token = s.botToken ?: return
         val chatId = s.chatId ?: return // nothing is sent until the owner sends /start
         val rejectedThisPass = mutableSetOf<Long>()
 
-        while (active) {
+        while (isActive()) {
             // Re-read after every message: SMS that arrive meanwhile are picked up in the same pass.
             val msg = messages.nextPending(RetryPolicy.MAX_TRIES, rejectedThisPass) ?: return
-            when (deliver(token, chatId, msg)) {
+            when (deliver(token, chatId, msg, isActive)) {
                 Outcome.SENT -> Unit
                 Outcome.REJECTED -> rejectedThisPass += msg.id
                 Outcome.NO_CONNECTION, Outcome.STOPPED -> return
@@ -59,7 +65,7 @@ class MessageDispatcher(
         }
     }
 
-    private fun deliver(token: String, chatId: Long, msg: StoredMessage): Outcome {
+    private fun deliver(token: String, chatId: Long, msg: StoredMessage, isActive: () -> Boolean): Outcome {
         val formatted = MessageFormatter.format(msg)
         var last: SendResult = SendResult.NetworkError("not attempted")
 
@@ -67,7 +73,7 @@ class MessageDispatcher(
             if (attempt > 0) {
                 // Retries are not logged one by one; only the final result is.
                 signal.await(RetryPolicy.delayMs(attempt)) // a new SMS or "network is back" shortens the pause
-                if (!active) return Outcome.STOPPED
+                if (!isActive()) return Outcome.STOPPED
             }
             last = sendOnce(token, chatId, formatted)
             when (val r = last) {

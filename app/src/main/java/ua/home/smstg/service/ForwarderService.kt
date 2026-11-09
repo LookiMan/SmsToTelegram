@@ -73,6 +73,8 @@ class ForwarderService : Service() {
     }
 
     @Volatile private var running = false
+    /** Belongs to this service instance only; the dispatcher checks it to stop a pass. */
+    private val isActive: () -> Boolean = { running }
     private val pollPause = WakeSignal()
     private var wakeLock: PowerManager.WakeLock? = null
     private var wifiLock: WifiManager.WifiLock? = null
@@ -88,7 +90,6 @@ class ForwarderService : Service() {
 
         running = true
         graph.status.isRunning = true
-        graph.dispatcher.active = true
 
         smsReceiver = RuntimeSmsReceiver(graph.smsInbox).also { it.register(this) }
         networkWatcher = NetworkWatcher(
@@ -122,7 +123,6 @@ class ForwarderService : Service() {
     override fun onDestroy() {
         running = false
         graph.connection.onRestored = null
-        graph.dispatcher.active = false
         graph.status.isRunning = false
         graph.senderSignal.raise()
         pollPause.raise()
@@ -142,7 +142,7 @@ class ForwarderService : Service() {
         var lastPrune = 0L
 
         checkConnection()
-        graph.dispatcher.sendPending() // anything left from before
+        graph.dispatcher.sendPending(isActive) // anything left from before
 
         while (running) {
             val wait = minOf(nextCheck, nextResend) - System.currentTimeMillis()
@@ -150,7 +150,7 @@ class ForwarderService : Service() {
             if (!running) break
 
             // An event: send right away, no extra check (speed matters most).
-            if (woken) graph.dispatcher.sendPending()
+            if (woken) graph.dispatcher.sendPending(isActive)
 
             // The mode may have changed: bring the timers forward if the new intervals are shorter.
             mode = graph.settings.get().perfMode
@@ -161,7 +161,7 @@ class ForwarderService : Service() {
             if (now >= nextCheck) {
                 val wasDown = graph.connection.isReachable == false
                 // Telegram just became reachable again: send what waited.
-                if (checkConnection() && wasDown) graph.dispatcher.sendPending()
+                if (checkConnection() && wasDown) graph.dispatcher.sendPending(isActive)
                 now = System.currentTimeMillis()
                 nextCheck = now + mode.networkCheckMs
             }
@@ -169,7 +169,7 @@ class ForwarderService : Service() {
             if (now >= nextResend) {
                 // Resend leftovers unless we already know Telegram is unreachable;
                 // the check timer or the network watcher takes over then.
-                if (graph.connection.isReachable != false) graph.dispatcher.sendPending()
+                if (graph.connection.isReachable != false) graph.dispatcher.sendPending(isActive)
                 now = System.currentTimeMillis()
                 nextResend = now + mode.resendMs
             }
